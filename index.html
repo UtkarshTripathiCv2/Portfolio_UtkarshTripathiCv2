@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utkarsh Tripathi - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #111827;
+            --text-color-primary: #e5e7eb;
+            --text-color-secondary: #9ca3af;
+            --card-bg: rgba(31, 41, 55, 0.5);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --header-bg: rgba(17, 24, 39, 0.8);
+            --scrollbar-track: #1f2937;
+            --scrollbar-thumb: #4f46e5;
+            --skill-bg: #1f2937;
+            --section-bg: rgba(17, 24, 39, 0.5);
+        }
+
+        html.light {
+            --bg-color: #f9fafb;
+            --text-color-primary: #111827;
+            --text-color-secondary: #4b5563;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --border-color: #e5e7eb;
+            --header-bg: rgba(249, 250, 251, 0.8);
+            --scrollbar-track: #e5e7eb;
+            --scrollbar-thumb: #6366f1;
+            --skill-bg: #e5e7eb;
+            --section-bg: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .text-secondary {
+            color: var(--text-color-secondary);
+        }
+        .section-bg {
+             background-color: var(--section-bg);
+        }
+        .glass-effect {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        .animated-gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #f472b6);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 5s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .skill-tag {
+            background-color: var(--skill-bg);
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+            background-color: #4f46e5;
+            color: white !important;
+        }
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(129, 140, 248, 0.4);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+        .glow-btn { position: relative; overflow: hidden; z-index: 1; }
+        .glow-btn:hover { box-shadow: 0 0 15px 5px rgba(99, 102, 241, 0.6); }
+        .glow-btn:active { transform: scale(0.98); }
+        
+        #theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.5rem; color: var(--text-color-primary); }
+        
+        .highlight-card {
+            border-color: #c084fc;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect" id="header">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold animated-gradient-text">UT</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#about" class="hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#projects" class="hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#skills" class="hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="#experience" class="hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                        <a href="#contact" class="hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="mr-4">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#projects" class="hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#skills" class="hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#experience" class="hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#contact" class="hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center">
+            <div class="text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
+                    <span class="block">Hi, I'm</span>
+                    <span class="animated-gradient-text">Utkarsh Tripathi</span>
+                </h1>
+                <p class="text-lg md:text-2xl text-secondary max-w-3xl mx-auto">
+                    A Computer Science student specializing in Computer Vision and Embedded Systems. I bring ideas to life by bridging software and hardware.
+                </p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <a href="#projects" class="glow-btn bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300">View My Work</a>
+                    <a href="cv25resumeutkarsh.docx" download class="glow-btn bg-gray-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-600 transition-all duration-300">Download CV</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 animated-gradient-text">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gray-700 border-4 border-indigo-500 flex items-center justify-center overflow-hidden shadow-2xl">
+                             <img src="https://placehold.co/320x320/1f2937/e5e7eb?text=Your+Image" alt="Utkarsh Tripathi Profile Picture" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3 text-center md:text-left">
+                        <p class="text-lg text-secondary leading-relaxed">
+                            I am a dedicated Computer Science student with a profound passion for the intersection of hardware and software. My focus lies in computer vision and embedded systems, where I enjoy tackling complex challenges. From designing intelligent robots with advanced sensor integration to developing real-time image processing applications, I am driven by the desire to build tangible, impactful technology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 sm:py-32 section-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 animated-gradient-text">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="project-card rounded-lg overflow-hidden glass-effect p-6 flex flex-col">
+                        <div class="h-48 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                            <img src="https://placehold.co/400x200/1f2937/e5e7eb?text=Project+Image" alt="Xypher Bot" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Xypher Bot – Autonomous Surveying Robot</h3>
+                        <p class="text-secondary text-sm flex-grow">An intelligent robot for autonomous surveying. My research paper on this project won a best paper award at an international conference.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="#" class="text-sm bg-red-600/80 text-white py-1 px-3 rounded-full hover:bg-red-500 transition-colors"><i class="fab fa-youtube mr-1"></i> Watch Demo</a>
+                            <!-- THIS IS THE CORRECTED LINK -->
+                            <a href="research_paper_xypher_bot.html" target="_blank" class="text-sm bg-indigo-600/80 text-white py-1 px-3 rounded-full hover:bg-indigo-500 transition-colors"><i class="fas fa-book-open mr-1"></i> Read Paper</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card rounded-lg overflow-hidden glass-effect p-6 flex flex-col">
+                        <div class="h-48 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                           <img src="https://placehold.co/400x200/1f2937/e5e7eb?text=Project+Image" alt="Newton's Apple" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Newton’s Apple</h3>
+                        <p class="text-secondary text-sm flex-grow">A device that simulates Newton's apple fall to measure height using an ESP32, MPU6050, and a Telegram bot for fall detection and result notification.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="#" class="text-sm bg-red-600/80 text-white py-1 px-3 rounded-full hover:bg-red-500 transition-colors"><i class="fab fa-youtube mr-1"></i> Watch Demo</a>
+                            <a href="#" class="text-sm bg-gray-600/80 text-white py-1 px-3 rounded-full hover:bg-gray-500 transition-colors"><i class="fas fa-link mr-1"></i> View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card rounded-lg overflow-hidden glass-effect p-6 flex flex-col">
+                        <div class="h-48 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                           <img src="https://placehold.co/400x200/1f2937/e5e7eb?text=Project+Image" alt="CV Webapp" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Multiple Filter CV Webapp</h3>
+                        <p class="text-secondary text-sm flex-grow">A deployed website with live webcam features like face filters, an anonymizer, a fitness pose corrector, and intruder detection using computer vision.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="#" class="text-sm bg-red-600/80 text-white py-1 px-3 rounded-full hover:bg-red-500 transition-colors"><i class="fab fa-youtube mr-1"></i> Watch Demo</a>
+                            <a href="#" class="text-sm bg-gray-600/80 text-white py-1 px-3 rounded-full hover:bg-gray-500 transition-colors"><i class="fas fa-link mr-1"></i> View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card rounded-lg overflow-hidden glass-effect p-6 flex flex-col">
+                        <div class="h-48 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                           <img src="https://placehold.co/400x200/1f2937/e5e7eb?text=Project+Image" alt="Baby Monitoring System" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Baby Monitoring System</h3>
+                        <p class="text-secondary text-sm flex-grow">An emergency alert system that sends the baby's location and an image to a designated WhatsApp number in case of an emergency.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="#" class="text-sm bg-red-600/80 text-white py-1 px-3 rounded-full hover:bg-red-500 transition-colors"><i class="fab fa-youtube mr-1"></i> Watch Demo</a>
+                            <a href="#" class="text-sm bg-gray-600/80 text-white py-1 px-3 rounded-full hover:bg-gray-500 transition-colors"><i class="fas fa-link mr-1"></i> View Project</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 animated-gradient-text">Technical Skills</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Python</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">C</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Java</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Arduino</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Robotics</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Prompt Engineering</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Raspberry Pi</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">Computer Vision</span>
+                    <span class="skill-tag text-sky-400 text-sm font-semibold px-4 py-2 rounded-full">SQL</span>
+                    <span class="skill-tag text-green-400 text-sm font-semibold px-4 py-2 rounded-full">Project Management</span>
+                    <span class="skill-tag text-green-400 text-sm font-semibold px-4 py-2 rounded-full">Researcher</span>
+                    <span class="skill-tag text-green-400 text-sm font-semibold px-4 py-2 rounded-full">Creative Thinking</span>
+                    <span class="skill-tag text-green-400 text-sm font-semibold px-4 py-2 rounded-full">Problem Solving</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 sm:py-32 section-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 animated-gradient-text">Experience & Awards</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="glass-effect p-6 rounded-lg">
+                            <h3 class="text-xl font-bold">IBM PBEL Training and Internship in IoT</h3>
+                            <p class="text-indigo-400 font-medium">June 2025 - July 2025</p>
+                        </div>
+                        <div class="glass-effect p-6 rounded-lg">
+                            <h3 class="text-xl font-bold">GRASTECH Training and Internship in Java Core and Advance</h3>
+                            <p class="text-indigo-400 font-medium">July 2025 - August 2025</p>
+                        </div>
+                         <div class="glass-effect highlight-card p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-2">Awards & Recognitions</h3>
+                            <ul class="list-disc list-inside text-secondary space-y-2">
+                                <li class="font-semibold text-purple-300"><i class="fas fa-star text-yellow-400 mr-2"></i>Best Paper Award @ 5th International AI Conference</li>
+                                <li>2nd Runner-Up BuildWithAI (LPCPS)</li>
+                                <li>Smart Earth Hackathon & Ideathon Finalist (SCRS)</li>
+                                <li>Member – Cohere Lab & University Robotics Club</li>
+                                <li>Ex Coordinator – Soft Computing Research Society</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 animated-gradient-text">Get In Touch</h2>
+                <p class="text-lg text-secondary mb-8 max-w-2xl mx-auto">I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out!</p>
+                <a href="mailto:tripathigaurav99199@gmail.com" class="glow-btn inline-block bg-indigo-600 text-white font-semibold px-8 py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 text-lg">
+                    Say Hello <i class="fas fa-paper-plane ml-2"></i>
+                </a>
+                <div class="mt-12 flex justify-center gap-6">
+                    <a href="https://github.com/UtkarshTripathiCv2" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-indigo-400 text-3xl transition-colors"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/utkarshtripathiai" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-indigo-400 text-3xl transition-colors"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="section-bg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-secondary">
+            <p>&copy; 2025 Utkarsh Tripathi. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const set_theme = (theme) => {
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                htmlEl.classList.remove('light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                htmlEl.classList.add('light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        };
+
+        const storedTheme = localStorage.getItem('theme');
+        const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        set_theme(storedTheme || preferredTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = htmlEl.classList.contains('light') ? 'dark' : 'light';
+            set_theme(newTheme);
+        });
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.style.backgroundColor = window.scrollY > 50 ? 'var(--header-bg)' : 'transparent';
+        });
+    </script>
+</body>
+</html>
